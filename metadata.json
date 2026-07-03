@@ -1,0 +1,6 @@
+{
+  "name": "AI Developer Portfolio",
+  "description": "데이터와 AI로 복잡한 문제의 원인을 찾아 가장 단순한 해결책을 만드는 AI 개발자 윤태현의 포트폴리오",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
