@@ -7,24 +7,19 @@
  * Endpoint: POST /api/send-email
  */
 
-import type { VercelRequest, VercelResponse } from "@vercel/node";
+import express from "express";
 import nodemailer from "nodemailer";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+const app = express();
+
+// Parse JSON body
+app.use(express.json());
+
+app.post("/api/send-email", async (req, res) => {
   // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-  // Handle preflight
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
-  // Only allow POST
-  if (req.method !== "POST") {
-    return res.status(405).json({ success: false, error: "Method not allowed" });
-  }
 
   try {
     const { name, company, message } = req.body;
@@ -112,4 +107,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       error: "Failed to send email. Please try again later.",
     });
   }
-}
+});
+
+// Handle OPTIONS (CORS preflight)
+app.options("/api/send-email", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.status(200).end();
+});
+
+export default app;
