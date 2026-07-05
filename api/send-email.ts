@@ -7,10 +7,9 @@
  * Endpoint: POST /api/send-email
  */
 
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 import nodemailer from "nodemailer";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -27,7 +26,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { name, company, message } = req.body;
+    // Manually parse JSON body
+    const body = await new Promise<any>((resolve, reject) => {
+      let data = "";
+      req.on("data", (chunk: string) => { data += chunk; });
+      req.on("end", () => {
+        try {
+          resolve(JSON.parse(data));
+        } catch {
+          reject(new Error("Invalid JSON"));
+        }
+      });
+    });
+
+    const { name, company, message } = body;
 
     // Validation
     if (!name || !message) {
