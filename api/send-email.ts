@@ -15,12 +15,18 @@ const app = express();
 // Parse JSON body
 app.use(express.json());
 
-app.post("/api/send-email", async (req, res) => {
-  // CORS headers
+// CORS middleware
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  next();
+});
 
+app.post("/", async (req, res) => {
   try {
     const { name, company, message } = req.body;
 
@@ -107,14 +113,6 @@ app.post("/api/send-email", async (req, res) => {
       error: "Failed to send email. Please try again later.",
     });
   }
-});
-
-// Handle OPTIONS (CORS preflight)
-app.options("/api/send-email", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.status(200).end();
 });
 
 export default app;
