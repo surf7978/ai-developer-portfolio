@@ -7,28 +7,35 @@
  * Endpoint: POST /api/send-email
  */
 
-import express from "express";
 import nodemailer from "nodemailer";
 
-const app = express();
-
-// Parse JSON body
-app.use(express.json());
-
-// CORS middleware
-app.use((req, res, next) => {
+export default async function handler(req: any, res: any) {
+  // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Handle preflight
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
-  next();
-});
 
-app.post("/", async (req, res) => {
+  // Only allow POST
+  if (req.method !== "POST") {
+    return res.status(405).json({ success: false, error: "Method not allowed" });
+  }
+
   try {
-    const { name, company, message } = req.body;
+    // Read raw body using Promise-based approach
+    const rawBody = await new Promise<string>((resolve, reject) => {
+      let data = "";
+      req.on("data", (chunk: any) => { data += chunk; });
+      req.on("end", () => resolve(data));
+      req.on("error", (err: any) => reject(err));
+    });
+    const body = JSON.parse(rawBody);
+
+    const { name, company, message } = body;
 
     // Validation
     if (!name || !message) {
@@ -113,6 +120,4 @@ app.post("/", async (req, res) => {
       error: "Failed to send email. Please try again later.",
     });
   }
-});
-
-export default app;
+}
