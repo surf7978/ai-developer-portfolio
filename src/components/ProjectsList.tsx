@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { PROJECTS } from "../data";
 import { Project } from "../types";
+import StreamlitPlayground from "./StreamlitPlayground";
 
 export default function ProjectsList() {
   const [selectedCategory, setSelectedCategory] = useState<"All" | "AI" | "Manufacturing" | "Circuit">("All");
@@ -273,128 +274,169 @@ export default function ProjectsList() {
         </div>
 
         {/* Right column: Immersive, step-by-step interactive problem solving storybook */}
-        <div className="lg:col-span-8">
-          <div className="bg-white border border-gray-100/70 rounded-[20px] p-6 sm:p-8 shadow-sm">
-            {/* Project Header details */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-100 mb-8">
-              <div>
-                <div className="flex items-center space-x-2 mb-2">
-                  <span className="text-[10px] font-mono bg-blue-50 text-brand-secondary px-2.5 py-1 rounded-md font-bold uppercase">
-                    {activeProject.category} PROJECT
-                  </span>
-                  <span className="text-xs font-mono text-gray-400">| {activeProject.period}</span>
+        <div className="lg:col-span-8 max-h-[580px] overflow-y-auto pr-2 custom-scrollbar space-y-8">
+          {activeProject.id === "proj-5" ? (
+            <div className="bg-white border border-gray-100/70 rounded-[20px] p-6 sm:p-8 shadow-sm">
+              {/* Project Header details */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-100 mb-6">
+                <div>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <span className="text-[10px] font-mono bg-blue-50 text-brand-secondary px-2.5 py-1 rounded-md font-bold uppercase">
+                      {activeProject.category} LIVE APP DEMO
+                    </span>
+                    <span className="text-xs font-mono text-gray-400">| {activeProject.period}</span>
+                  </div>
+                  <h3 className="text-xl font-display font-extrabold text-gray-900 leading-snug">
+                    {activeProject.title}
+                  </h3>
+                  <p className="text-xs text-gray-400 font-medium mt-1">
+                    담당 역할 : <span className="text-gray-700 font-semibold">{activeProject.role}</span>
+                  </p>
                 </div>
-                <h3 className="text-xl font-display font-extrabold text-gray-900 leading-snug">
-                  {activeProject.title}
-                </h3>
-                <p className="text-xs text-gray-400 font-medium mt-1">
-                  담당 역할 : <span className="text-gray-700 font-semibold">{activeProject.role}</span>
-                </p>
+              </div>
+
+              {/* Integrated Streamlit Playground */}
+              <StreamlitPlayground />
+
+              {/* Bottom code technology stack strip */}
+              <div className="mt-8 pt-5 border-t border-gray-100/70 flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-mono uppercase font-bold text-gray-400 mr-2 flex items-center">
+                  <Code size={12} className="mr-1 text-gray-400" />
+                  Applied Technologies:
+                </span>
+                {activeProject.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="bg-gray-50/70 border border-gray-100 text-gray-600 text-[11px] font-medium font-mono px-2.5 py-1 rounded-md"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
-
-            {/* Stepper Tabs - Problem to Learned */}
-            <div className="flex items-center overflow-x-auto pb-4 gap-1 sm:gap-1.5 scrollbar-none mb-8 border-b border-gray-50">
-              {steps.map((step, idx) => {
-                const isActive = activeStep === idx;
-                return (
-                  <button
-                    key={step.title}
-                    onClick={() => setActiveStep(idx)}
-                    className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-medium cursor-pointer shrink-0 transition-all ${
-                      isActive
-                        ? `${step.color} shadow-3xs font-bold scale-[1.02] border`
-                        : "bg-gray-50/70 border border-transparent text-gray-500 hover:text-gray-900 hover:bg-gray-100"
-                    }`}
-                  >
-                    <span className="shrink-0">{step.icon}</span>
-                    <span className="hidden sm:inline">{step.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Storybook interactive content panel with fade-in animation */}
-            <div className="min-h-[250px] relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${activeProject.id}-${activeStep}`}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  transition={{ duration: 0.25, ease: "easeInOut" }}
-                  className="space-y-6"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold tracking-widest text-gray-400 uppercase">
-                      PHASE 0{activeStep + 1} / {steps[activeStep].title}
+          ) : (
+            <div className="bg-white border border-gray-100/70 rounded-[20px] p-6 sm:p-8 shadow-sm">
+              {/* Project Header details */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-100 mb-8">
+                <div>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <span className="text-[10px] font-mono bg-blue-50 text-brand-secondary px-2.5 py-1 rounded-md font-bold uppercase">
+                      {activeProject.category} PROJECT
                     </span>
-                    <span className="text-xs font-mono text-brand-secondary font-semibold bg-blue-50/50 px-2 py-0.5 rounded-md">
-                      {steps[activeStep].label}
-                    </span>
+                    <span className="text-xs font-mono text-gray-400">| {activeProject.period}</span>
                   </div>
+                  <h3 className="text-xl font-display font-extrabold text-gray-900 leading-snug">
+                    {activeProject.title}
+                  </h3>
+                  <p className="text-xs text-gray-400 font-medium mt-1">
+                    담당 역할 : <span className="text-gray-700 font-semibold">{activeProject.role}</span>
+                  </p>
+                </div>
+              </div>
 
-                  {/* Main content render */}
-                  {renderStepContent(activeStep, activeProject)}
-
-                  {/* Next Step / Prev Step quick navigator */}
-                  <div className="pt-8 border-t border-gray-50 flex items-center justify-between">
+              {/* Stepper Tabs - Problem to Learned */}
+              <div className="flex items-center overflow-x-auto pb-4 gap-1 sm:gap-1.5 scrollbar-none mb-8 border-b border-gray-50">
+                {steps.map((step, idx) => {
+                  const isActive = activeStep === idx;
+                  return (
                     <button
-                      disabled={activeStep === 0}
-                      onClick={() => setActiveStep((prev) => prev - 1)}
-                      className="text-xs font-semibold text-gray-400 hover:text-gray-700 disabled:opacity-30 disabled:pointer-events-none cursor-pointer p-2 rounded-lg hover:bg-gray-50"
+                      key={step.title}
+                      onClick={() => setActiveStep(idx)}
+                      className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-medium cursor-pointer shrink-0 transition-all ${
+                        isActive
+                          ? `${step.color} shadow-3xs font-bold scale-[1.02] border`
+                          : "bg-gray-50/70 border border-transparent text-gray-500 hover:text-gray-900 hover:bg-gray-100"
+                      }`}
                     >
-                      ← 이전 단계
+                      <span className="shrink-0">{step.icon}</span>
+                      <span className="hidden sm:inline">{step.label}</span>
                     </button>
+                  );
+                })}
+              </div>
 
-                    <div className="flex items-center space-x-1">
-                      {steps.map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${activeStep === i ? "bg-brand-secondary w-3" : "bg-gray-200"}`}
-                        />
-                      ))}
+              {/* Storybook interactive content panel with fade-in animation */}
+              <div className="min-h-[250px] relative">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`${activeProject.id}-${activeStep}`}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    className="space-y-6"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono font-bold tracking-widest text-gray-400 uppercase">
+                        PHASE 0{activeStep + 1} / {steps[activeStep].title}
+                      </span>
+                      <span className="text-xs font-mono text-brand-secondary font-semibold bg-blue-50/50 px-2 py-0.5 rounded-md">
+                        {steps[activeStep].label}
+                      </span>
                     </div>
 
-                    {activeStep < 5 ? (
-                      <button
-                        onClick={() => setActiveStep((prev) => prev + 1)}
-                        className="text-xs font-bold text-brand-secondary hover:text-brand-primary cursor-pointer p-2 rounded-lg hover:bg-blue-50/50"
-                      >
-                        다음 단계 →
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          const nextProjIdx = (PROJECTS.findIndex((p) => p.id === activeProject.id) + 1) % PROJECTS.length;
-                          selectProject(PROJECTS[nextProjIdx]);
-                        }}
-                        className="text-xs font-bold text-emerald-600 hover:text-emerald-700 cursor-pointer p-2 rounded-lg hover:bg-emerald-50/50"
-                      >
-                        다른 프로젝트 보기 →
-                      </button>
-                    )}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                    {/* Main content render */}
+                    {renderStepContent(activeStep, activeProject)}
 
-            {/* Bottom code technology stack strip */}
-            <div className="mt-8 pt-5 border-t border-gray-100/70 flex flex-wrap items-center gap-2">
-              <span className="text-[10px] font-mono uppercase font-bold text-gray-400 mr-2 flex items-center">
-                <Code size={12} className="mr-1 text-gray-400" />
-                Applied Technologies:
-              </span>
-              {activeProject.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="bg-gray-50/70 border border-gray-100 text-gray-600 text-[11px] font-medium font-mono px-2.5 py-1 rounded-md"
-                >
-                  {tech}
+                    {/* Next Step / Prev Step quick navigator */}
+                    <div className="pt-8 border-t border-gray-50 flex items-center justify-between">
+                      <button
+                        disabled={activeStep === 0}
+                        onClick={() => setActiveStep((prev) => prev - 1)}
+                        className="text-xs font-semibold text-gray-400 hover:text-gray-700 disabled:opacity-30 disabled:pointer-events-none cursor-pointer p-2 rounded-lg hover:bg-gray-50"
+                      >
+                        ← 이전 단계
+                      </button>
+
+                      <div className="flex items-center space-x-1">
+                        {steps.map((_, i) => (
+                          <div
+                            key={i}
+                            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${activeStep === i ? "bg-brand-secondary w-3" : "bg-gray-200"}`}
+                          />
+                        ))}
+                      </div>
+
+                      {activeStep < 5 ? (
+                        <button
+                          onClick={() => setActiveStep((prev) => prev + 1)}
+                          className="text-xs font-bold text-brand-secondary hover:text-brand-primary cursor-pointer p-2 rounded-lg hover:bg-blue-50/50"
+                        >
+                          다음 단계 →
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            const nextProjIdx = (PROJECTS.findIndex((p) => p.id === activeProject.id) + 1) % PROJECTS.length;
+                            selectProject(PROJECTS[nextProjIdx]);
+                          }}
+                          className="text-xs font-bold text-emerald-600 hover:text-emerald-700 cursor-pointer p-2 rounded-lg hover:bg-emerald-50/50"
+                        >
+                          다른 프로젝트 보기 →
+                        </button>
+                      )}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Bottom code technology stack strip */}
+              <div className="mt-8 pt-5 border-t border-gray-100/70 flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-mono uppercase font-bold text-gray-400 mr-2 flex items-center">
+                  <Code size={12} className="mr-1 text-gray-400" />
+                  Applied Technologies:
                 </span>
-              ))}
+                {activeProject.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="bg-gray-50/70 border border-gray-100 text-gray-600 text-[11px] font-medium font-mono px-2.5 py-1 rounded-md"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

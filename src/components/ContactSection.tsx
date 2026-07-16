@@ -4,7 +4,7 @@
  */
 
 import { useState, FormEvent } from "react";
-import { Mail, Clipboard, Check, MapPin, ExternalLink, ArrowRight, Loader2, AlertCircle } from "lucide-react";
+import { Mail, Clipboard, Check, MapPin, ExternalLink, ArrowRight } from "lucide-react";
 import { PERSONAL_INFO } from "../data";
 
 export default function ContactSection() {
@@ -13,8 +13,6 @@ export default function ContactSection() {
   const [senderName, setSenderName] = useState("");
   const [senderCompany, setSenderCompany] = useState("");
   const [message, setMessage] = useState("");
-  const [isSending, setIsSending] = useState(false);
-  const [error, setError] = useState("");
 
   const copyEmailToClipboard = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
@@ -22,42 +20,16 @@ export default function ContactSection() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!senderName || !message) return;
-
-    setIsSending(true);
-    setError("");
-
-    try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: senderName,
-          company: senderCompany,
-          message: message,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to send email");
-      }
-
-      setFormSubmitted(true);
-      setTimeout(() => {
-        setFormSubmitted(false);
-        setSenderName("");
-        setSenderCompany("");
-        setMessage("");
-      }, 4000);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "이메일 전송에 실패했습니다. 잠시 후 다시 시도해주세요.");
-    } finally {
-      setIsSending(false);
-    }
+    setFormSubmitted(true);
+    setTimeout(() => {
+      setFormSubmitted(false);
+      setSenderName("");
+      setSenderCompany("");
+      setMessage("");
+    }, 4000);
   };
 
   return (
@@ -212,30 +184,13 @@ export default function ContactSection() {
                     />
                   </div>
 
-                  {error && (
-                    <div className="flex items-center space-x-2 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
-                      <AlertCircle size={14} className="text-red-500 shrink-0" />
-                      <p className="text-[11px] text-red-600 font-medium">{error}</p>
-                    </div>
-                  )}
-
                   <button
                     id="contact-submit-btn"
                     type="submit"
-                    disabled={isSending}
-                    className="w-full flex items-center justify-center space-x-2 bg-brand-primary hover:bg-brand-primary/95 disabled:opacity-60 disabled:cursor-not-allowed text-white py-3.5 rounded-xl text-xs font-semibold uppercase tracking-wider cursor-pointer transition-all shadow-xs"
+                    className="w-full flex items-center justify-center space-x-2 bg-brand-primary hover:bg-brand-primary/95 text-white py-3.5 rounded-xl text-xs font-semibold uppercase tracking-wider cursor-pointer transition-all shadow-xs"
                   >
-                    {isSending ? (
-                      <>
-                        <Loader2 size={13} className="animate-spin" />
-                        <span>전송 중...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>문의 메시지 보내기</span>
-                        <ArrowRight size={13} />
-                      </>
-                    )}
+                    <span>문의 메시지 보내기</span>
+                    <ArrowRight size={13} />
                   </button>
                 </form>
               )}

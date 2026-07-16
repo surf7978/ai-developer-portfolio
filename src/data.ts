@@ -83,6 +83,36 @@ export const CORE_STRENGTHS: CoreStrength[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: "proj-5",
+    title: "Streamlit 기반 AI Anomaly Detection 실시간 시각화 대시보드 구축",
+    subtitle: "Interactive Web Sandbox & Deployment",
+    period: "2025.11 - 2025.12",
+    role: "Full-Stack Developer",
+    category: "AI",
+    techStack: ["Python", "Streamlit", "PyTorch", "Data Simulation", "Cloud Deployment"],
+    iconName: "Terminal",
+    achievement: {
+      problem: "인공지능 모델의 이상 탐지 결과 및 고주파 센서 데이터를 하드웨어 담당자 및 현장 조장들이 복잡한 코드나 터미널 조작 없이 대화형으로 직접 시뮬레이션하고 통제할 수 있는 경량 웹 대시보드 환경 부재.",
+      causeAnalysis: [
+        "기존 무거운 리액트나 장고 기반 풀스택 구축은 필드 단위의 빠른 피드백과 소형 프로토타이핑을 가로막는 리소스 병목 요인으로 작동.",
+        "작업자들이 임계 시그마(σ) 가이드라인을 미세 제어하며 오탐지율 변화를 모니터링할 수 있는 대화식 하이퍼파라미터 튜닝 기구 미비."
+      ],
+      data: [
+        "전체 웹 서비스 아키텍처 인프라 구축 소요 기간을 90% 이상 획기적으로 압축할 목표 설계.",
+        "실적 클라우드 환경 배포 및 가상 대시보드 연동 시 0.15초 이내의 빠른 연산 피드백 인터랙션 레이턴시 확보."
+      ],
+      solution: [
+        "Python의 최고 경량 데이터 시각화 웹 프레임워크인 Streamlit을 기반으로 이상 탐지 파이프라인의 UI 구성 요소를 미니멀하게 설계.",
+        "임계치(Threshold) 및 오차 스펙트럼 분석 시뮬레이션을 내장하여, 사용자가 슬라이더 조작을 통해 실시간으로 딥러닝 예측 결과 변화를 직접 검증 가능한 반응형 앱 엔진 구현."
+      ],
+      result: [
+        "Streamlit Cloud 환경에 웹 대시보드를 즉각 성공적으로 실배포하여, 협업 부서 및 인사 담당자에게 인터랙티브 포트폴리오 형태로 실시간 가동 데모 증명 완료.",
+        "필드 오작동 진단 및 파라미터 조정 시간을 수십 분에서 단 3초 단위의 슬라이더 조절 시각화로 단축하는 혁신 프로토타입 제시."
+      ],
+      learned: "고도화된 딥러닝 수치 모델 역시, 현장의 최종 관리자가 한눈에 파악하고 직관적으로 통제할 수 있는 반응형 UI/UX가 결합할 때 비로소 완성된 '실제 비즈니스 가치'로 거듭난다는 진리를 절감했습니다."
+    }
+  },
+  {
     id: "proj-1",
     title: "딥러닝 기반 실시간 제조 설비 이상 탐지 및 모니터링 시스템 개발",
     subtitle: "AI Anomaly Detection",
