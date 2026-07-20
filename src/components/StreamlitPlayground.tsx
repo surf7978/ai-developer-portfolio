@@ -36,8 +36,8 @@ export default function StreamlitPlayground() {
         </a>
       </div>
 
-      {/* Main Content Area - Immersive Embedded Iframe */}
-      <div className="relative bg-slate-900 h-[680px] w-full">
+      {/* Main Content Area - Immersive Embedded Iframe (responsive to container) */}
+      <div className="relative bg-slate-900 h-[520px] w-full">
         <iframe
           src="https://app-xjfw2rxeeg6gpfxydiqgnt.streamlit.app/?embed=true"
           title="Yoon Tae Hyun Streamlit Portfolio"
