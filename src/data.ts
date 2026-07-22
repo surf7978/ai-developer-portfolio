@@ -83,37 +83,6 @@ export const CORE_STRENGTHS: CoreStrength[] = [
 
 export const PROJECTS: Project[] = [
   {
-    id: "proj-mnist",
-    title: "PyTorch & Streamlit 기반 MNIST CNN 손글씨 숫자 인식 분류 모델",
-    subtitle: "Interactive Computer Vision & Real-time Drawing Demo",
-    period: "2026.01 - 2026.02",
-    role: "AI Developer",
-    category: "AI",
-    techStack: ["Python", "PyTorch", "CNN", "Streamlit", "Computer Vision", "Cloud Deployment"],
-    iconName: "Terminal",
-    demoUrl: "https://mnistcnn-xppgzn6nkgkwcyyszibde7.streamlit.app/",
-    achievement: {
-      problem: "CNN 딥러닝 이미지 분류 모델의 추론 과정 및 클래스별 확률 분포를 사용자가 직접 웹 화면에서 필기체를 그리며 실시간 검증할 수 있는 대화형 웹 인터페이스 환경 구축.",
-      causeAnalysis: [
-        "단순 정적 테스트 데이터셋 평가표 방식은 필기체 변형에 대한 모델의 실시간 인퍼런스 및 유저 경험 검증에 한계 존재.",
-        "웹 캔버스 드로잉 입력 영상을 28x28 픽셀 전처리 및 텐서 변환으로 실시간 연동하는 초경량 웹 서빙 파이프라인 필요성 식별."
-      ],
-      data: [
-        "MNIST 70,000건 손글씨 데이터셋 학습 및 데이터 증강(Augmentation) 파이프라인 적용.",
-        "PyTorch 기반 합성곱 신경망(CNN) 모델 설계 및 테스트 정확도(Accuracy) 99% 이상 달성."
-      ],
-      solution: [
-        "PyTorch를 활용하여 Conv2D, BatchNorm, MaxPool, Dropout 및 Fully Connected Layer 기반의 정밀 CNN 분류 아키텍처 구축.",
-        "Streamlit 드로잉 캔버스 컴포넌트를 연동하여 사용자가 그린 필기체 이미지를 실시간 정규화 후 CNN 모델 추론 연산으로 연결하는 시각화 UI 개발."
-      ],
-      result: [
-        "Streamlit Cloud에 MNIST CNN 실시간 인퍼런스 웹 앱을 성공적으로 실배포하여 대화형 모델 인터랙션 데모 제공.",
-        "0~9 각 숫자에 대한 실시간 예측 확률(Probability Distribution) 바 차트를 시각화하여 AI 모델의 투명한 추론 근거 제시."
-      ],
-      learned: "딥러닝 비전 모델 설계부터 캔버스 전처리, 실시간 인터랙티브 웹 연동 및 클라우드 배포까지 이어지는 AI End-to-End 서비스 개발 경험을 내재화했습니다."
-    }
-  },
-  {
     id: "proj-5",
     title: "Streamlit 기반 AI Anomaly Detection 실시간 시각화 대시보드 구축",
     subtitle: "Interactive Web Sandbox & Deployment",
@@ -122,7 +91,6 @@ export const PROJECTS: Project[] = [
     category: "AI",
     techStack: ["Python", "Streamlit", "PyTorch", "Data Simulation", "Cloud Deployment"],
     iconName: "Terminal",
-    demoUrl: "https://app-xjfw2rxeeg6gpfxydiqgnt.streamlit.app/",
     achievement: {
       problem: "인공지능 모델의 이상 탐지 결과 및 고주파 센서 데이터를 하드웨어 담당자 및 현장 조장들이 복잡한 코드나 터미널 조작 없이 대화형으로 직접 시뮬레이션하고 통제할 수 있는 경량 웹 대시보드 환경 부재.",
       causeAnalysis: [

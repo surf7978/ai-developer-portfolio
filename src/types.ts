@@ -22,7 +22,6 @@ export interface Project {
   achievement: ProjectAchievement;
   techStack: string[];
   iconName: string; // Lucide icon name
-  demoUrl?: string;
 }
 
 export interface ExperienceAchievement {
