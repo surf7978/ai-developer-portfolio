@@ -274,11 +274,27 @@ export default function ProjectsList() {
         </div>
 
         {/* Right column: Immersive, step-by-step interactive problem solving storybook */}
-        <div className="lg:col-span-8 max-h-[580px] overflow-y-auto pr-2 custom-scrollbar space-y-8">
-          {activeProject.id === "proj-5" ? (
+        <div className="lg:col-span-8 max-h-[720px] overflow-y-auto pr-2 custom-scrollbar space-y-8">
+          {activeProject.demoUrl ? (
             <div className="bg-white border border-gray-100/70 rounded-[20px] p-4 sm:p-5 shadow-sm">
-              {/* Integrated Streamlit Playground - full width, no header */}
-              <StreamlitPlayground />
+              {/* Integrated Streamlit Playground */}
+              <StreamlitPlayground url={activeProject.demoUrl} title={activeProject.title} />
+
+              {/* Bottom code technology stack strip */}
+              <div className="mt-5 pt-4 border-t border-gray-100/70 flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-mono uppercase font-bold text-gray-400 mr-2 flex items-center">
+                  <Code size={12} className="mr-1 text-gray-400" />
+                  Applied Technologies:
+                </span>
+                {activeProject.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="bg-gray-50/70 border border-gray-100 text-gray-600 text-[11px] font-medium font-mono px-2.5 py-1 rounded-md"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
           ) : (
             <div className="bg-white border border-gray-100/70 rounded-[20px] p-6 sm:p-8 shadow-sm">
