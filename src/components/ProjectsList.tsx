@@ -212,13 +212,13 @@ export default function ProjectsList() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        {/* Left column: List of projects under filtered category */}
-        <div className="lg:col-span-4 space-y-3.5">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-gray-400 block mb-2 font-bold px-2">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Left column: Compact list of projects under filtered category */}
+        <div className="lg:col-span-3 space-y-3">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-gray-400 block mb-1 font-bold px-1">
             Select Project ({filteredProjects.length})
           </span>
-          <div className="space-y-3 max-h-[580px] overflow-y-auto pr-2 custom-scrollbar">
+          <div className="space-y-2.5 max-h-[680px] overflow-y-auto pr-1.5 custom-scrollbar">
             {filteredProjects.map((proj) => {
               const isActive = activeProject.id === proj.id;
               return (
@@ -226,45 +226,45 @@ export default function ProjectsList() {
                   id={`project-item-${proj.id}`}
                   key={proj.id}
                   onClick={() => selectProject(proj)}
-                  className={`w-full text-left p-5 rounded-[20px] border transition-all duration-300 transform hover:scale-[1.01] flex flex-col items-start relative overflow-hidden cursor-pointer ${
+                  className={`w-full text-left p-3.5 rounded-[16px] border transition-all duration-300 transform hover:scale-[1.01] flex flex-col items-start relative overflow-hidden cursor-pointer ${
                     isActive
-                      ? "bg-white border-brand-primary shadow-sm"
+                      ? "bg-white border-brand-primary shadow-xs"
                       : "bg-white border-gray-100 hover:bg-gray-50/50 hover:border-gray-200"
                   }`}
                 >
                   {isActive && (
-                    <div className="absolute top-0 bottom-0 left-0 w-1.5 bg-brand-primary" />
+                    <div className="absolute top-0 bottom-0 left-0 w-1 bg-brand-primary" />
                   )}
 
                   {/* Project Tag & Badge */}
-                  <div className="flex items-center justify-between w-full mb-3">
-                    <span className="text-[9px] font-mono tracking-widest bg-gray-100 px-2 py-0.5 rounded-md text-gray-500 font-bold uppercase">
+                  <div className="flex items-center justify-between w-full mb-2">
+                    <span className="text-[8.5px] font-mono tracking-wider bg-gray-100 px-2 py-0.5 rounded-md text-gray-500 font-bold uppercase truncate max-w-[100px]">
                       {proj.category}
                     </span>
-                    <span className="text-[10px] font-mono text-gray-400">{proj.period}</span>
+                    <span className="text-[9.5px] font-mono text-gray-400 shrink-0">{proj.period}</span>
                   </div>
 
                   {/* Icon + Title */}
-                  <div className="flex items-start space-x-3">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${isActive ? "bg-blue-50 text-brand-secondary" : "bg-gray-50 text-gray-400"}`}>
+                  <div className="flex items-start space-x-2.5 w-full">
+                    <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${isActive ? "bg-blue-50 text-brand-secondary" : "bg-gray-50 text-gray-400"}`}>
                       {getProjectIcon(proj.iconName, isActive ? "text-brand-secondary animate-pulse" : "text-gray-400")}
                     </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-gray-900 leading-snug">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-xs font-bold text-gray-900 leading-snug line-clamp-2">
                         {proj.title}
                       </h3>
-                      <p className="text-[11px] font-mono text-gray-400 mt-1">
+                      <p className="text-[10px] font-mono text-gray-400 mt-0.5 line-clamp-1">
                         {proj.subtitle}
                       </p>
                     </div>
                   </div>
 
                   {/* Mini summary metrics for quick scanning */}
-                  <div className="mt-4 pt-3 border-t border-gray-50 w-full flex items-center justify-between text-[11px] text-gray-500">
-                    <span className="font-medium text-gray-400">역할: {proj.role.split(" ")[0]}</span>
-                    <div className="flex items-center text-brand-secondary font-semibold group-hover:translate-x-0.5 transition-transform">
-                      <span>상세 분석</span>
-                      <ChevronRight size={11} className="ml-0.5" />
+                  <div className="mt-2.5 pt-2 border-t border-gray-50 w-full flex items-center justify-between text-[10px] text-gray-500">
+                    <span className="font-medium text-gray-400 truncate">역할: {proj.role.split(" ")[0]}</span>
+                    <div className="flex items-center text-brand-secondary font-semibold shrink-0">
+                      <span>상세</span>
+                      <ChevronRight size={10} className="ml-0.5" />
                     </div>
                   </div>
                 </button>
@@ -273,8 +273,8 @@ export default function ProjectsList() {
           </div>
         </div>
 
-        {/* Right column: Immersive, step-by-step interactive problem solving storybook */}
-        <div className="lg:col-span-8 max-h-[720px] overflow-y-auto pr-2 custom-scrollbar space-y-8">
+        {/* Right column: Expanded interactive preview and problem solving storybook */}
+        <div className="lg:col-span-9 max-h-[720px] overflow-y-auto pr-2 custom-scrollbar space-y-8">
           {activeProject.demoUrl ? (
             <div className="bg-white border border-gray-100/70 rounded-[20px] p-4 sm:p-5 shadow-sm">
               {/* Integrated Streamlit Playground */}

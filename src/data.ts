@@ -84,7 +84,7 @@ export const CORE_STRENGTHS: CoreStrength[] = [
 export const PROJECTS: Project[] = [
   {
     id: "proj-mnist-2",
-    title: "PyTorch & Streamlit 기반 MNIST CNN 손글씨 숫자 인식 분류 모델 v2",
+    title: "날씨와 시간에 따른 자전거 대여량 회귀 예측",
     subtitle: "Interactive Computer Vision & Real-time Canvas Inference Demo",
     period: "2026.02 - 2026.03",
     role: "AI Developer",

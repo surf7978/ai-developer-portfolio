@@ -53,22 +53,22 @@ export default function StreamlitPlayground({
       }`}
     >
       {/* Top Bar with Fullscreen button on the right */}
-      <div className="bg-white px-4 py-2 border-b border-gray-100 flex items-center justify-end">
-        <div className="flex items-center space-x-2">
+      <div className="bg-white px-3 py-1 border-b border-gray-100 flex items-center justify-end">
+        <div className="flex items-center space-x-1.5">
           <button
             onClick={toggleFullscreen}
-            className="flex items-center space-x-1.5 text-gray-700 hover:text-gray-900 bg-gray-100/80 hover:bg-gray-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+            className="flex items-center space-x-1 text-gray-600 hover:text-gray-900 bg-gray-100/80 hover:bg-gray-200 px-2 py-0.5 rounded-md text-[11px] font-semibold transition-colors cursor-pointer"
             title="Fullscreen"
           >
             {isFullscreen ? (
               <>
-                <Minimize2 size={13} />
+                <Minimize2 size={11} />
                 <span>Exit Fullscreen</span>
               </>
             ) : (
               <>
                 <span>Fullscreen</span>
-                <Maximize2 size={13} />
+                <Maximize2 size={11} />
               </>
             )}
           </button>
@@ -77,10 +77,10 @@ export default function StreamlitPlayground({
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-gray-600 transition-colors p-1.5 hover:bg-gray-100 rounded-lg"
+            className="text-gray-400 hover:text-gray-600 transition-colors p-1 hover:bg-gray-100 rounded-md"
             title="새 탭에서 열기"
           >
-            <ExternalLink size={13} />
+            <ExternalLink size={11} />
           </a>
         </div>
       </div>
